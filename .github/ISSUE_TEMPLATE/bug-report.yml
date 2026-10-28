@@ -1,0 +1,33 @@
+name: Bug or wrong documentation
+description: Something in a script or guide is wrong or unclear.
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Remove serial numbers, MAC addresses, Wi-Fi names, e-mails and personal IPs from logs before posting.**
+        For help with the jailbreak itself, the KindleModding community is the right place (link on the previous page).
+  - type: input
+    id: device
+    attributes:
+      label: Kindle model and firmware
+    validations:
+      required: true
+  - type: input
+    id: where
+    attributes:
+      label: Script or doc (file name)
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what you expected
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Command and (redacted) output
+      render: text

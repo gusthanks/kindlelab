@@ -1,0 +1,27 @@
+# Personal data never belongs in this repo
+backups/
+*.img
+*.img.zst
+screenshots/
+*.png
+!docs/img/*.png
+highlights/
+My Clippings.txt
+settings.reader.lua
+*.sqlite3
+authorized_keys
+*_ed25519
+*.pem
+privacy-denylist
+
+# Downloads and build output (link to upstream instead of redistributing)
+packages/
+staging/
+*.zip
+*.bin
+*.tar.xz
+*.sha256
+
+__pycache__/
+*.pyc
+.env
