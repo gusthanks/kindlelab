@@ -13,5 +13,5 @@
 | KOReader changes are lost | Settings edited while KOReader was running | Close KOReader, edit, verify, relaunch |
 | OPDS download lands in a strange folder | `download_dir` unset: KOReader uses the last folder visited | Set `download_dir` ([04](04-koreader.md)) |
 | Clock one hour ahead in KOReader only | Outdated time-zone data in `/var/local/system/tz` | See [04](04-koreader.md#known-issue-clock-one-hour-ahead-in-koreader) |
-| Kindle does not join a Wi-Fi network | PW3 is 2.4 GHz only; WPA3-only networks may also fail | Use a 2.4 GHz WPA2 network |
+| Kindle does not join a Wi-Fi network ("Error connecting to Wi-Fi") | Kindles released before 2021 support neither 5 GHz nor WPA3 ([Amazon](https://www.amazon.com/gp/help/customer/display.html?nodeId=G5HYWUVWRXFSCH7E)); WPA2/WPA3 mixed mode with PMF required, MAC filtering or "ax only" modes can also block a PW3; or simply a wrong/old saved password | Read the reason in the Kindle's own log: `ssh kindle 'showlog \| grep -iE "wpa\|wifid\|assoc\|handshake\|reason" \| tail -60'`. A failed 4-way handshake points to the password; an association reject points to the security mode. Use a 2.4 GHz network with WPA2-PSK (AES) |
 | SSH over Wi-Fi does not answer | Not enabled, different network, or the Kindle is asleep (Wi-Fi off) | [03](03-usbnetwork-ssh.md#ssh-over-wi-fi-not-done-yet-read-before-enabling) |
