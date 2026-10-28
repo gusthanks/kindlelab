@@ -1,7 +1,7 @@
 # KindleLab
 
 Verified notes and small, careful scripts for living with a **jailbroken Kindle** from a Linux PC:
-SSH over USB, auto-update (OTA) blocking, KOReader with a simple home screen, full backups,
+SSH over USB and Wi-Fi (keys only), auto-update (OTA) blocking, KOReader with a simple home screen, full backups,
 and highlight export to Markdown.
 
 > **Tested on exactly one device:** Kindle Paperwhite 3 (7th gen, `muscat_wario`), firmware
@@ -16,6 +16,7 @@ sem você mandar**:
 
 - **Acesso direto por SSH pelo cabo USB** (USBNetwork), inclusive a armadilha do roteador que usa a
   mesma faixa de IP `192.168.15.x`, que também impede o Wi-Fi do Kindle de conectar, e como resolver.
+- **Acesso pelo Wi-Fi só com chave**: nenhuma senha funciona, e o cabo continua como plano B.
 - **Bloqueio de atualização automática** (OTA) e como confirmar que ele está ativo.
 - **KOReader** com tela inicial simples (SimpleUI), dicionário em português, catálogos de livros
   gratuitos, notícias e um atalho de um toque na tela inicial do Kindle.
@@ -41,6 +42,7 @@ foi testado do que foi relatado pela comunidade. Tem outro modelo? Abra um
 | Script | Purpose | Writes to the Kindle? |
 |---|---|---|
 | `usbnet-connect.sh` | Configure the PC side of USBNetwork (NetworkManager), handle subnet clashes | no |
+| `kindle-find-wifi.sh` | Find the Kindle's Wi-Fi address on your LAN by its MAC (for SSH over Wi-Fi) | no |
 | `kindle-status.sh` | Health panel: firmware, OTA block, hotfix, battery, Wi-Fi, clock, space, SSH mode | no |
 | `kindle-screenshot.sh` | Screenshot of the e-ink screen (via `fbgrab`) | `/tmp` only |
 | `full-backup.sh` | Bit-exact image of the system area + boot partitions, hash-checked on the device, plus incremental file copy | no |

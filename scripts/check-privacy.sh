@@ -14,7 +14,8 @@ cd "$(git rev-parse --show-toplevel)" || exit 2
 DENY=${KINDLELAB_DENYLIST:-$HOME/.config/kindlelab/privacy-denylist}
 
 if [ "${1:-}" = "--all" ]; then
-  mapfile -t FILES < <(git ls-files)
+  # tracked + untracked (not ignored) files, so new files are checked before "git add" too
+  mapfile -t FILES < <(git ls-files --cached --others --exclude-standard)
   show() { cat -- "$1"; }
 else
   mapfile -t FILES < <(git diff --cached --name-only --diff-filter=ACMR)

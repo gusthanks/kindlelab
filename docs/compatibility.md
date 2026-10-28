@@ -16,7 +16,7 @@ guess for a test:
 | USBNetwork 0.22.N + SSH with keys | ✅ | 📚 FW ≥ 5.16.3: [kindle-usbnetlite](https://github.com/notmarek/kindle-usbnetlite) |
 | `usbnet-connect.sh` (NetworkManager) | ✅ Arch-based Linux | ❓ other distros; manual `ip` commands printed without nmcli |
 | Kindle Wi-Fi on a `192.168.15.x` LAN while USBNetwork is on (after [moving `KINDLE_IP`](03-usbnetwork-ssh.md#kindle-wi-fi-fails-on-a-19216815x-lan-move-kindle_ip)) | ✅ failed before, connects after | ❓ |
-| SSH over Wi-Fi | ❓ | ❓ |
+| SSH over Wi-Fi, keys only (`USE_WIFI` + dropbear `-s`, [03](03-usbnetwork-ssh.md#ssh-over-wi-fi-keys-only)) | ✅ key works over Wi-Fi and cable, passwords refused; boot autostart enabled, reboot not yet tested | ❓ |
 | KOReader 2026.07.1 (`kindlepw2`) via SSH | ✅ | 📚 [KOReader wiki](https://github.com/koreader/koreader/wiki/Installation-on-Kindle-devices): `kindlehf` on FW ≥ 5.16.3 |
 | KOReader via KPM (`;kpm install koreader`) | not tried | 📚 reported failing on PW3 5.16.2.1.1: [WinterBreak#63](https://github.com/KindleModding/WinterBreak/issues/63), [Winterbreak2#5](https://github.com/KindleModding/Winterbreak2/issues/5) |
 | SimpleUI 3.0.1 | ✅ | 📚 needs KOReader ≥ 2026.03 ([README](https://github.com/doctorhetfield-cmd/simpleui.koplugin)) |
