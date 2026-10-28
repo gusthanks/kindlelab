@@ -4,8 +4,8 @@
 # or run by hand on every tracked file:  scripts/check-privacy.sh --all
 #
 # Generic patterns: Kindle serial numbers, MAC addresses, IPv4 addresses (except the
-# USBNetwork defaults and documentation ranges), e-mail addresses, home-directory paths,
-# private keys, 32-hex device ids.
+# USBNetwork defaults, the alternative 192.168.244.x used in the docs, and documentation ranges),
+# e-mail addresses, home-directory paths, private keys, 32-hex device ids.
 # Your own literals (Wi-Fi names, public IPs, names, book titles...) go in a file that is
 # NOT in the repo: ${KINDLELAB_DENYLIST:-~/.config/kindlelab/privacy-denylist}
 # (one per line, case-insensitive, lines starting with # ignored).
@@ -21,7 +21,7 @@ else
   show() { git show ":$1"; }
 fi
 
-ALLOWED_IP='^(192\.168\.15\.(0|1|201|244|255)|127\.0\.0\.1|0\.0\.0\.0|255\.255\.255\.[0-9]+|169\.254\.[0-9]+\.[0-9]+|192\.0\.2\.[0-9]+|198\.51\.100\.[0-9]+|203\.0\.113\.[0-9]+)$'
+ALLOWED_IP='^(192\.168\.15\.(0|1|201|244|255)|192\.168\.244\.(0|201|244|255)|127\.0\.0\.1|0\.0\.0\.0|255\.255\.255\.[0-9]+|169\.254\.[0-9]+\.[0-9]+|192\.0\.2\.[0-9]+|198\.51\.100\.[0-9]+|203\.0\.113\.[0-9]+)$'
 PATTERNS=(
   'serial|\b(G0|B0|90)[0-9A-Z]{14}\b'
   'MAC address|\b([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}\b'

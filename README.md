@@ -15,7 +15,7 @@ O KindleLab reúne o que aprendemos personalizando um Kindle Paperwhite 3 desblo
 sem você mandar**:
 
 - **Acesso direto por SSH pelo cabo USB** (USBNetwork), inclusive a armadilha do roteador que usa a
-  mesma faixa de IP `192.168.15.x`.
+  mesma faixa de IP `192.168.15.x`, que também impede o Wi-Fi do Kindle de conectar, e como resolver.
 - **Bloqueio de atualização automática** (OTA) e como confirmar que ele está ativo.
 - **KOReader** com tela inicial simples (SimpleUI), dicionário em português, catálogos de livros
   gratuitos, notícias e um atalho de um toque na tela inicial do Kindle.
