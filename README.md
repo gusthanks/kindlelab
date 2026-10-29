@@ -16,6 +16,7 @@ book, and tools that check every step. No DRM removal, no risky shortcuts.
 | Your Kindle today | Go to |
 |---|---|
 | Not jailbroken yet | **[The jailbreak guide](docs/jailbreak-guide.md)**: the whole trip on one page |
+| Somewhere in the middle | **[Where am I?](https://gusthanks.github.io/kindlelab/)**: plug in the Kindle and the page tells you your step (it runs in your browser; nothing is sent) |
 | Jailbroken, but you're not sure what state it's in | [Diagnose an existing jailbreak](docs/01-diagnose.md) (read-only) |
 | Jailbroken, with KOReader | [What KindleLab adds](#what-kindlelab-adds) |
 
@@ -25,7 +26,8 @@ book, and tools that check every step. No DRM removal, no risky shortcuts.
   every detail, spread over many pages. Our [jailbreak guide](docs/jailbreak-guide.md) puts the trip in
   order on one page: why each step matters, what to do, how you know it worked, when to stop and ask for
   help, and the words you will meet. For the exact clicks it links to the official page, so it never
-  replaces them.
+  replaces them. Lost on the way? The [Where am I?](https://gusthanks.github.io/kindlelab/) page looks at
+  your Kindle and tells you the step.
 - **A finished reader, not just a jailbreak.** Most guides end at "install KOReader". KindleLab keeps going
   ([below](#what-kindlelab-adds)).
 - **Safety you can check.** Backups first, every copy verified with SHA-256 on the device, read-only
@@ -77,11 +79,12 @@ default is in progress.
 | Path | What it is |
 |---|---|
 | [`docs/`](docs/) | The guides above |
+| [`checker/`](checker/) | The [Where am I?](https://gusthanks.github.io/kindlelab/) page (runs in the browser) and its command-line version |
 | [`scripts/`](scripts/) | PC-side tools (bash/python). All read-only on the Kindle unless stated |
 | [`koreader-config/`](koreader-config/) | KOReader user patches, the KindleLab plugin, OPDS catalog and news-feed templates |
 | [`kindle-files/`](kindle-files/) | Small files to copy to the Kindle (e.g. the one-tap KOReader tile and its icons) |
 | [`systemd/`](systemd/) | Optional user timer that checks new books on the Kindle (see docs/07) |
-| [`tests/`](tests/) | Unit tests: `tests/run.sh` (Lua) and `python3 -m unittest discover -s tests` |
+| [`tests/`](tests/) | Unit tests: `tests/run.sh` (Lua and the checker's Node tests) and `python3 -m unittest discover -s tests` |
 
 ### Scripts
 

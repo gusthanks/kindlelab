@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- No network at all: this page can only read what you choose, and can't send it anywhere. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="Plug in your Kindle and find out which step of the KindleLab jailbreak guide you are on. Runs entirely in your browser.">
+<title>KindleLab · Where am I?</title>
+<link rel="stylesheet" href="style.css">
+<script type="module" src="app.js"></script>
+</head>
+<body>
+<main>
+  <nav class="lang" aria-label="Language / Idioma">
+    <button type="button" data-lang="en">English</button>
+    <button type="button" data-lang="pt">Português</button>
+  </nav>
+  <header>
+    <p class="brand">KindleLab</p>
+    <h1 data-t="title">Where am I?</h1>
+    <p class="sub" data-t="subtitle">A KindleLab helper for the jailbreak guide</p>
+  </header>
+  <p data-t="intro">Plug your Kindle into this computer and choose its drive.</p>
+  <div class="pick">
+    <button type="button" id="pick" class="primary" data-t="pick">Choose the Kindle drive</button>
+    <button type="button" id="pick-other" class="secondary" data-t="pickOther" hidden>Try another way</button>
+    <input type="file" id="fallback" webkitdirectory multiple hidden>
+    <p id="status" class="status-line" role="status"></p>
+  </div>
+  <p class="privacy" data-t="privacy"></p>
+  <p class="hint" data-t="mtp"></p>
+  <section id="result" hidden aria-live="polite"></section>
+  <footer>
+    <a id="guide-link" href="https://github.com/gusthanks/kindlelab/blob/main/docs/jailbreak-guide.md" data-t="footer">Read the full guide</a>
+    ·
+    <a id="source-link" href="https://github.com/gusthanks/kindlelab/tree/main/checker" data-t="source">Source code</a>
+  </footer>
+  <noscript><p class="card warn">This page needs JavaScript to read the folder you choose. / Esta página precisa de JavaScript para ler a pasta escolhida.</p></noscript>
+</main>
+</body>
+</html>

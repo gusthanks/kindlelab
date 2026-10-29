@@ -1,0 +1,54 @@
+name: Where am I? page
+
+# Tests the checker on every change, then publishes the checker/ folder with GitHub Pages:
+# https://gusthanks.github.io/kindlelab/
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'checker/**'
+      - 'tests/checker*.test.mjs'
+      - 'docs/jailbreak-guide*.md'
+      - '.github/workflows/checker.yml'
+  pull_request:
+    paths:
+      - 'checker/**'
+      - 'tests/checker*.test.mjs'
+      - 'docs/jailbreak-guide*.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node --test tests/checker*.test.mjs
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: checker
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -16,6 +16,11 @@ exact clicks and downloads.
 with WinterBreak and finished through the older "legacy" path ([step 6B](#6b-legacy-path-post-jailbreak)).
 The rest of this page summarizes the official guides. Other models: [compatibility](compatibility.md).
 
+> [!TIP]
+> **Not sure where you are?** Plug in the Kindle and open the
+> [Where am I? page](https://gusthanks.github.io/kindlelab/). It looks at a few file names, right in your
+> browser, and tells you your step. Nothing leaves your computer.
+
 ## The trip at a glance
 
 ```mermaid

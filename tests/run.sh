@@ -8,4 +8,8 @@ for spec in tests/*_spec.lua; do
     echo "== $spec"
     "$LUA" "$spec" || status=1
 done
+if command -v node >/dev/null; then
+    echo "== checker (node --test)"
+    node --test tests/checker*.test.mjs || status=1
+fi
 exit $status

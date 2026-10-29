@@ -20,6 +20,11 @@ o WinterBreak e finalizado pelo caminho antigo, chamado "legacy" ([passo 6B](#6b
 O resto desta página resume os guias oficiais. Outros modelos: [compatibilidade](compatibility.md) (em
 inglês).
 
+> [!TIP]
+> **Não sabe em que passo está?** Ligue o Kindle no computador e abra a página
+> [Onde estou?](https://gusthanks.github.io/kindlelab/?lang=pt). Ela olha alguns nomes de arquivos, no seu
+> próprio navegador, e diz o seu passo. Nada sai do seu computador.
+
 ## A viagem inteira
 
 ```mermaid

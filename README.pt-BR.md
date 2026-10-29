@@ -16,6 +16,7 @@ cada tipo de livro e ferramentas que conferem cada passo. Sem remover DRM e sem 
 | Seu Kindle hoje | Vá para |
 |---|---|
 | Ainda não desbloqueado | **[O guia de desbloqueio](docs/jailbreak-guide.pt-BR.md)**: a viagem inteira numa página só |
+| No meio do caminho | **[Onde estou?](https://gusthanks.github.io/kindlelab/?lang=pt)**: ligue o Kindle e a página diz em que passo você está (roda no seu navegador; nada é enviado) |
 | Desbloqueado, mas você não sabe em que estado está | [Diagnóstico de um desbloqueio existente](docs/01-diagnose.md) (só leitura, em inglês) |
 | Desbloqueado e com o KOReader | [O que o KindleLab acrescenta](#o-que-o-kindlelab-acrescenta) |
 
@@ -25,7 +26,9 @@ cada tipo de livro e ferramentas que conferem cada passo. Sem remover DRM e sem 
   têm todos os detalhes, espalhados por muitas páginas e em inglês. O nosso
   [guia de desbloqueio](docs/jailbreak-guide.pt-BR.md) põe a viagem em ordem numa página só: por que cada
   passo importa, o que fazer, como saber que deu certo, quando parar e pedir ajuda, e o que significa cada
-  palavra nova. Para os cliques exatos, ele leva à página oficial, então nunca toma o lugar dela.
+  palavra nova. Para os cliques exatos, ele leva à página oficial, então nunca toma o lugar dela. Se perdeu no
+  caminho? A página [Onde estou?](https://gusthanks.github.io/kindlelab/?lang=pt) olha o seu Kindle e diz o
+  passo.
 - **Um leitor pronto, não só um desbloqueio.** A maioria dos guias termina em "instale o KOReader". O
   KindleLab continua ([abaixo](#o-que-o-kindlelab-acrescenta)).
 - **Segurança que dá para conferir.** Backup antes de tudo, cada cópia conferida por SHA-256 no próprio
@@ -80,11 +83,12 @@ inglês, e a maioria dos navegadores traduz a página (botão direito → **Trad
 | Pasta | O que é |
 |---|---|
 | [`docs/`](docs/) | Os guias acima |
+| [`checker/`](checker/) | A página [Onde estou?](https://gusthanks.github.io/kindlelab/?lang=pt) (roda no navegador) e a versão para terminal |
 | [`scripts/`](scripts/) | Ferramentas para o PC (bash/python). Só leem o Kindle, salvo quando indicado |
 | [`koreader-config/`](koreader-config/) | Patches do KOReader, o plugin do KindleLab, modelos de catálogo OPDS e de notícias |
 | [`kindle-files/`](kindle-files/) | Arquivos pequenos para copiar no Kindle (por exemplo, o ícone de um toque do KOReader) |
 | [`systemd/`](systemd/) | Timer opcional que confere livros novos no Kindle (veja o docs/07) |
-| [`tests/`](tests/) | Testes: `tests/run.sh` (Lua) e `python3 -m unittest discover -s tests` |
+| [`tests/`](tests/) | Testes: `tests/run.sh` (Lua e os testes Node da página) e `python3 -m unittest discover -s tests` |
 
 ### Scripts
 

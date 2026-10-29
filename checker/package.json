@@ -1,0 +1,6 @@
+{
+  "name": "kindlelab-checker",
+  "private": true,
+  "type": "module",
+  "description": "Where am I? page: reads the Kindle drive in the browser and tells which step of the jailbreak guide you are on"
+}
