@@ -1,68 +1,39 @@
 # KindleLab
 
-**Turn a jailbroken Kindle into a reader that is pleasant every day and safe to maintain: one library
-for all your books, new books that organize themselves, reading settings that suit each kind of book, and
-a Linux toolbox that checks every step. No DRM removal, no risky shortcuts.**
+**English** · [Português](README.pt-BR.md)
+
+**Jailbreak your Kindle without getting lost, then turn it into a reader that is pleasant every day.**
+One page walks you through the jailbreak in plain words, with the official link for every click. After
+that: one library for all your books, new books that organize themselves, settings that suit each kind of
+book, and tools that check every step. No DRM removal, no risky shortcuts.
 
 > **Tested on exactly one device:** Kindle Paperwhite 3 (7th gen, `muscat_wario`), firmware
 > **5.16.2.1.1**. Everything else is either *community-reported* (with a link) or *untested*.
 > Check [docs/compatibility.md](docs/compatibility.md) before following anything on another model.
 
-## Para que serve (em português)
+## Start here
 
-Desbloquear o Kindle é só o começo. Logo aparecem as dúvidas. Como acessar o aparelho pelo PC sem deixar
-uma porta aberta? Como evitar que uma atualização desfaça tudo? Dá para usar o KOReader sem perder os
-livros comprados na Amazon? Por que a biblioteca mostra pastas do sistema? O KindleLab reúne as respostas
-que testamos num aparelho real, com tudo conferido.
-
-### O que muda no dia a dia
-
-| Sem o KindleLab | Com o KindleLab |
+| Your Kindle today | Go to |
 |---|---|
-| Duas bibliotecas: as compras da Amazon no leitor do Kindle, o resto no KOReader | **Uma biblioteca só.** Os livros da Amazon aparecem no KOReader com capa, título e autor, e abrem no leitor do Kindle com um toque. O DRM não é tocado. |
-| Dicionários, scripts e pastas vazias misturados aos livros | **Só livros na lista.** Os dicionários continuam funcionando, só ficam escondidos. |
-| Livro novo chega sem tipo e, às vezes, sem autor ou capa | **Organização automática:** cada livro novo ganha a etiqueta de tipo (Livro, PDF, Escaneado, Quadrinho, Amazon), e o PC avisa o que está faltando. |
-| PDF escaneado com margens enormes; quadrinho com o "fantasma" da página anterior | **Ajuste certo na primeira abertura:** margens cortadas e mais contraste no escaneado; página inteira e tela limpa a cada página no quadrinho. |
-| Tela de descanso genérica | **A capa do livro que você está lendo** na tela de descanso. |
-| KOReader escondido no menu do KUAL | **Ícone de um toque na tela inicial do Kindle**, com galeria de ícones e troca pelo próprio KOReader. |
-| Guias espalhados em fóruns e medo de travar o aparelho | **Passo a passo testado**, com backup completo antes e cada cópia conferida por SHA-256 no próprio Kindle. |
-| Acesso pelo PC com senha, só pelo cabo | **SSH só com chave**, pelo cabo USB ou pelo Wi-Fi, e o bloqueio de atualização automática conferido. |
-
-Também vem: KOReader em português com tela inicial simples (SimpleUI), dicionário, Wikipédia, catálogos
-de livros gratuitos, notícias e exportação dos seus destaques para Markdown.
-
-### Para quem é
-
-- Quem já tem um Kindle desbloqueado, ou vai desbloquear pelo guia oficial do
-  [kindlemodding.org](https://kindlemodding.org/).
-- Quem usa um PC com Linux para os scripts. As peças do KOReader são arquivos comuns, copiados para o
-  Kindle.
-- Quem quer o KOReader com cara de produto pronto, sem passar semanas lendo fóruns.
-
-### O que ele não faz
-
-- **Não desbloqueia o Kindle.** Para isso, siga o guia oficial do kindlemodding.org.
-- **Não remove DRM nem baixa livros de fontes piratas.** Livro comprado continua abrindo no leitor da
-  Amazon.
-- **Não troca o sistema do Kindle.** A análise de Android e "sistemas novos" está em
-  [docs/06](docs/06-android-and-custom-os.md). Resumo: não recomendamos.
-- **Não garante outros modelos.** Só testamos um aparelho. A tabela de
-  [compatibilidade](docs/compatibility.md) separa o que foi testado do que foi relatado pela
-  comunidade. Tem outro modelo? Abra um [relato de teste](../../issues/new/choose).
-
-### Estado atual
-
-- **Pronto e testado** no Paperwhite 3: tudo o que está na tabela acima.
-- **Instalação ainda manual:** cada peça do KOReader é copiada seguindo o
-  [koreader-config/README.md](koreader-config/README.md).
-- **Em andamento:** um pacote de instalação com toda esta configuração como padrão.
+| Not jailbroken yet | **[The jailbreak guide](docs/jailbreak-guide.md)**: the whole trip on one page |
+| Jailbroken, but you're not sure what state it's in | [Diagnose an existing jailbreak](docs/01-diagnose.md) (read-only) |
+| Jailbroken, with KOReader | [What KindleLab adds](#what-kindlelab-adds) |
 
 ## Why KindleLab
 
-Jailbreaking is only the first step. Then the questions start: how do I reach the Kindle from my PC
-without leaving a door open, keep an update from undoing everything, use KOReader without losing my
-Amazon books, and stop system folders from cluttering the library? KindleLab collects answers that were
-tested on a real device, step by step.
+- **One map instead of many tabs.** The official [KindleModding](https://kindlemodding.org/) guides have
+  every detail, spread over many pages. Our [jailbreak guide](docs/jailbreak-guide.md) puts the trip in
+  order on one page: why each step matters, what to do, how you know it worked, when to stop and ask for
+  help, and the words you will meet. For the exact clicks it links to the official page, so it never
+  replaces them.
+- **A finished reader, not just a jailbreak.** Most guides end at "install KOReader". KindleLab keeps going
+  ([below](#what-kindlelab-adds)).
+- **Safety you can check.** Backups first, every copy verified with SHA-256 on the device, read-only
+  diagnostics, key-only SSH.
+- **Honest about testing.** Everything is labeled tested, community-reported or untested.
+- **In English and Portuguese**, and ready for [more languages](#languages).
+
+## What KindleLab adds
 
 | Without KindleLab | With KindleLab |
 |---|---|
@@ -75,25 +46,37 @@ tested on a real device, step by step.
 | Scattered forum guides, fear of bricking | **Tested steps**, a full backup first, every copy verified with SHA-256 on the device. |
 | PC access with a password, cable only | **Key-only SSH** over USB or Wi-Fi, and a verified block of automatic updates. |
 
-Plus: KOReader in Portuguese with a simple home screen (SimpleUI), dictionary, Wikipedia, free-book
-catalogs, news, and highlight export to Markdown.
+Plus: KOReader with a simple home screen (SimpleUI), dictionary, Wikipedia, free-book catalogs, news, and
+highlight export to Markdown.
 
-**Who it is for:** owners of a jailbroken Kindle (or about to jailbreak one with the official
-[kindlemodding.org](https://kindlemodding.org/) guide) who use a Linux PC for the scripts. The KOReader
-pieces are plain files copied to the Kindle.
+**Who it is for:** anyone with a Kindle who wants KOReader without weeks of forum reading. The jailbreak
+guide works with any computer; the optional tools after it use a Linux PC, and the KOReader pieces are
+plain files you copy to the Kindle.
 
-**What it is not:** not a jailbreak, not a DRM remover or a piracy tool, not a replacement OS
+**What it is not:** not a jailbreak tool (we don't host or change jailbreak files; the guide sends you to the
+official ones), not a DRM remover or a piracy tool, not a replacement OS
 ([docs/06](docs/06-android-and-custom-os.md)), and not tested beyond one device.
 
-**Status:** everything above works and was tested on the PW3. Installing the KOReader pieces is still
-manual ([koreader-config/README.md](koreader-config/README.md)). A one-step package with this setup as
-the default is in progress.
+**Status:** everything in the table works and was tested on the PW3. Installing the KOReader pieces is still
+manual ([koreader-config/README.md](koreader-config/README.md)). A one-step package with this setup as the
+default is in progress.
+
+## Guides
+
+- **Jailbreak:** [the jailbreak guide](docs/jailbreak-guide.md) · [safety rules](docs/00-safety.md) ·
+  [diagnose an existing jailbreak](docs/01-diagnose.md) ·
+  [KUAL, MRPI and the OTA block](docs/02-kual-mrpi-ota.md) (legacy path)
+- **After the jailbreak:** [USBNetwork and SSH](docs/03-usbnetwork-ssh.md) · [KOReader](docs/04-koreader.md) ·
+  [full backup](docs/05-full-backup.md) · [the KindleLab reading setup](koreader-config/README.md) ·
+  [reading quality and new books](docs/07-reading-quality.md)
+- **Reference:** [troubleshooting](docs/troubleshooting.md) · [compatibility](docs/compatibility.md) ·
+  [Android and "new OS" questions](docs/06-android-and-custom-os.md)
 
 ## What's here
 
 | Path | What it is |
 |---|---|
-| [`docs/`](docs/) | Step-by-step guides, in the order we did them, plus troubleshooting and compatibility |
+| [`docs/`](docs/) | The guides above |
 | [`scripts/`](scripts/) | PC-side tools (bash/python). All read-only on the Kindle unless stated |
 | [`koreader-config/`](koreader-config/) | KOReader user patches, the KindleLab plugin, OPDS catalog and news-feed templates |
 | [`kindle-files/`](kindle-files/) | Small files to copy to the Kindle (e.g. the one-tap KOReader tile and its icons) |
@@ -115,28 +98,21 @@ the default is in progress.
 | `kindle-inventory.lua` | Read-only library listing run on the Kindle by `kindle-new-books.py` (KOReader's LuaJIT) | no |
 | `check-privacy.sh` | Pre-commit hook that blocks serials, MACs, IPs, e-mails, home paths and your own denylist | — |
 
-## Start here
-
-1. [docs/00-safety.md](docs/00-safety.md): the rules that keep the device alive.
-2. Already jailbroken but unsure what state it is in? [docs/01-diagnose.md](docs/01-diagnose.md).
-3. Then, in order: [KUAL, MRPI and OTA block](docs/02-kual-mrpi-ota.md) →
-   [USBNetwork / SSH](docs/03-usbnetwork-ssh.md) → [KOReader](docs/04-koreader.md) →
-   [full backup](docs/05-full-backup.md).
-4. The KindleLab reading experience (one library, tidy list, sleep screen, automatic organization):
-   [koreader-config/README.md](koreader-config/README.md), then
-   [docs/07-reading-quality.md](docs/07-reading-quality.md).
-5. Curious about Android or a "new OS"? [docs/06-android-and-custom-os.md](docs/06-android-and-custom-os.md).
-6. Something odd? [docs/troubleshooting.md](docs/troubleshooting.md).
-
-**This repo does not explain how to jailbreak.** Follow the official guides at
-[kindlemodding.org](https://kindlemodding.org/): they are maintained for every model and firmware.
-
 ## Ground rules
 
 - Back up first. One change at a time. Verify every copy with SHA-256 **on the device**.
 - Keep airplane mode on until the OTA block is verified.
 - Never factory-reset, deregister or update firmware "to fix something".
 - **No DRM removal, no piracy sources.** Purchased books stay in the stock reader.
+
+## Languages
+
+English is the main language. In Portuguese (Brazil): this README ([README.pt-BR.md](README.pt-BR.md)) and
+the [jailbreak guide](docs/jailbreak-guide.pt-BR.md). The other guides are in English.
+
+Want the jailbreak guide in your language? Copy `docs/jailbreak-guide.md` to
+`docs/jailbreak-guide.<language code>.md` (for example `jailbreak-guide.es.md`), translate it, add your
+language to the links at the top of every version, and open a pull request.
 
 ## Contributing
 
@@ -154,6 +130,7 @@ Scripts and docs: [MIT](LICENSE). Nothing third-party is redistributed here; fol
 [KindleModding](https://kindlemodding.org/) (WinterBreak, Universal Hotfix, guides),
 NiLuJe (USBNetwork, MRPI, KUAL tooling, [MobileRead](https://www.mobileread.com/forums/showthread.php?t=225030)),
 [KindleTweaks/PEKI](https://github.com/KindleTweaks/PEKI),
+[Kindle-Filler-Disk](https://github.com/iiroak/Kindle-Filler-Disk),
 [KOReader](https://github.com/koreader/koreader) (AGPL-3.0),
 [SimpleUI](https://github.com/doctorhetfield-cmd/simpleui.koplugin) (GPL-3.0),
 [reader-dict](https://www.reader-dict.com/) (Wiktionary dictionaries, CC BY-SA),
