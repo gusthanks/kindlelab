@@ -21,6 +21,10 @@ guess for a test:
 | KOReader via KPM (`;kpm install koreader`) | not tried | 📚 reported failing on PW3 5.16.2.1.1: [WinterBreak#63](https://github.com/KindleModding/WinterBreak/issues/63), [Winterbreak2#5](https://github.com/KindleModding/Winterbreak2/issues/5) |
 | SimpleUI 3.0.1 | ✅ | 📚 needs KOReader ≥ 2026.03 ([README](https://github.com/doctorhetfield-cmd/simpleui.koplugin)) |
 | Home-screen tile (`KOReader.sh`) | ✅ | 📚 needs scriptlet support ([format](https://kindlemodding.org/kindle-dev/scriptlets.html)) |
+| Amazon books in KOReader (`2-kindlelab-store-books.lua`) | ✅ listed with covers; a KFX opened in the stock reader (the path must be percent-encoded) | ❓ relies on the stock catalog `cc.db` and `com.lab126.booklet.reader` |
+| Tidy library (`2-kindlelab-library.lua`) and sleep screen (`2-kindlelab-sleepscreen.lua`) | ✅ | ❓ |
+| KindleLab plugin: type tags, first-opening profiles, comic toggle, icon switcher | ✅ on-device test with book copies; menu actions run through their own functions; icon swap tested on a copy of the launcher | ❓ |
+| `kindle-new-books.py` + systemd user timer | ✅ Arch-based Linux | ❓ other distros (needs Python 3, poppler for PDFs) |
 | `kindle-status.sh`, `kindle-screenshot.sh` | ✅ | ❓ need USBNetwork tools (`fbgrab`, `lipc-*`) |
 | `full-backup.sh` | ✅ | ❓ refuses unknown layouts, `--force` on untested models |
 | `pull-highlights.py` | ✅ clippings in PT, EN, FR | ❓ ES / DE / IT keywords included, untested |

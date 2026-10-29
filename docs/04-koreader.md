@@ -81,6 +81,10 @@ ssh kindle 'grep -iE "ERROR|WARN" /mnt/us/koreader/crash.log | tail'
 Prefer KOReader *user patches* (`koreader/patches/*.lua`) over editing plugin sources: SimpleUI
 checks for updates by itself and an update would overwrite edited files.
 
+KindleLab's own patches and plugin (Amazon books in the same library, a tidy list, the sleep screen,
+automatic organization of new books) are described, with install steps, in
+[koreader-config/README.md](../koreader-config/README.md).
+
 ## Known issue: clock one hour ahead in KOReader
 
 On our PW3 the Amazon UI shows the right time but KOReader and the shell are one hour ahead:
