@@ -20,6 +20,9 @@ sem você mandar**:
 - **Bloqueio de atualização automática** (OTA) e como confirmar que ele está ativo.
 - **KOReader** com tela inicial simples (SimpleUI), dicionário em português, catálogos de livros
   gratuitos, notícias e um atalho de um toque na tela inicial do Kindle.
+- **Livros novos se organizam sozinhos**: ganham a etiqueta de tipo (Livro, PDF, Escaneado, Quadrinho,
+  Amazon), PDFs escaneados e quadrinhos abrem com o ajuste certo na primeira vez, e o PC avisa o que falta
+  (título, autor, capa, sumário). Veja [qualidade de leitura](docs/07-reading-quality.md).
 - **Backup completo** (cópia bit a bit do sistema, conferida pelo próprio Kindle) e **exportação de
   destaques** para Markdown.
 - Avaliação honesta de **Android e "sistemas novos"** para o Kindle.
@@ -34,8 +37,10 @@ foi testado do que foi relatado pela comunidade. Tem outro modelo? Abra um
 |---|---|
 | [`docs/`](docs/) | Step-by-step guides, in the order we did them, plus troubleshooting and compatibility |
 | [`scripts/`](scripts/) | PC-side tools (bash/python). All read-only on the Kindle unless stated |
-| [`koreader-config/`](koreader-config/) | OPDS catalog and news-feed templates for KOReader |
+| [`koreader-config/`](koreader-config/) | KOReader user patches, the KindleLab plugin, OPDS catalog and news-feed templates |
 | [`kindle-files/`](kindle-files/) | Small files to copy to the Kindle (e.g. the one-tap KOReader tile) |
+| [`systemd/`](systemd/) | Optional user timer that checks new books on the Kindle (see docs/07) |
+| [`tests/`](tests/) | Unit tests: `tests/run.sh` (Lua) and `python3 -m unittest discover -s tests` |
 
 ### Scripts
 
@@ -48,6 +53,8 @@ foi testado do que foi relatado pela comunidade. Tem outro modelo? Abra um
 | `full-backup.sh` | Bit-exact image of the system area + boot partitions, hash-checked on the device, plus incremental file copy | no |
 | `pull-highlights.py` | `My Clippings.txt` (stock reader) + KOReader exports → one Markdown file per book | no |
 | `build-koreader-config.py` | Build a KOReader config (language, dictionary, OPDS, news, plugins) as a staging tree + manifest | no (you push it) |
+| `kindle-new-books.py` | Report on books added since the last check (title, author, cover, type tag, table of contents, scanned PDF / comic hints); `--notify` for the systemd timer | no |
+| `kindle-inventory.lua` | Read-only library listing run on the Kindle by `kindle-new-books.py` (KOReader's LuaJIT) | no |
 | `check-privacy.sh` | Pre-commit hook that blocks serials, MACs, IPs, e-mails, home paths and your own denylist | — |
 
 ## Start here

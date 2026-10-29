@@ -1,0 +1,10 @@
+[Unit]
+Description=KindleLab: look for new books on the Kindle every 15 minutes
+
+[Timer]
+OnBootSec=3min
+OnUnitActiveSec=15min
+RandomizedDelaySec=30s
+
+[Install]
+WantedBy=timers.target

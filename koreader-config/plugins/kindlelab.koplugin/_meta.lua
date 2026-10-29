@@ -1,5 +1,5 @@
 local _ = require("gettext")
 return {
     fullname = _("KindleLab"),
-    description = _([[Choose the icon of the KOReader tile on the Kindle home screen (KindleLab project).]]),
+    description = _([[KindleLab: type tags for new books, reading profiles for scanned PDFs and comics, and the Kindle home-screen icon of KOReader.]]),
 }

@@ -1,0 +1,10 @@
+[Unit]
+Description=KindleLab: check books newly added to the Kindle (read-only)
+Documentation=file://%h/KindleLab/kindlelab/docs/07-reading-quality.md
+After=network-online.target
+
+[Service]
+Type=oneshot
+# Exits quietly when the Kindle is asleep or disconnected. Reports stay on this PC (they list book titles).
+ExecStart=/usr/bin/python3 %h/KindleLab/kindlelab/scripts/kindle-new-books.py --lang pt --notify --quiet --reports-dir %h/KindleLab/relatorios
+Nice=10

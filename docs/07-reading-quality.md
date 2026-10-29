@@ -7,7 +7,8 @@ is not proof that every edition, translation, table of contents, or page layout 
 
 - Per-book `custom_metadata.lua` provides display titles, authors and tags without rewriting the book.
 - Per-book `cover.jpg` provides a library/sleep-screen cover without replacing the cover inside an EPUB.
-- The library patch indexes new books at startup. This is **not** an automatic content-quality audit.
+- The library patch indexes new books at startup, and the KindleLab plugin tags them by type (below).
+  Neither is a full content-quality audit.
 - Store books use the native Kindle reader; their protected contents are not inspected or converted.
 
 Keep the original files and a fresh backup before changing sidecars or reader settings. Never publish a
@@ -50,23 +51,56 @@ can legitimately contain little or no extractable text. Never reflow every PDF i
 - Some old unprotected MOBI files reach `AssertionError` at `guide is not None` in Calibre's `mobi6.py`.
   Keep the original. Test in the actual reader and investigate the conversion separately.
 
-## Proposed automatic intake — not installed yet
+## Automatic intake (installed and tested)
 
-A future intake workflow should:
+Tested on PW3 5.16.2.1.1 / KOReader v2026.07.1 with copies of a scanned PDF, an image-only PDF comic and
+an image MOBI comic, opened fresh. The book files are never changed.
 
-1. Watch only the book library, excluding dictionaries, system files and sidecar folders.
-2. Wait until a new transfer finishes, hash the file, and inspect it once per content version.
-3. Extract reliable title, author, language, cover and navigation. Flag missing or uncertain data instead
-   of inventing it or using an author guessed from a file name.
-4. Choose a visual profile on **first opening**, without overwriting settings of books already adjusted.
-5. Keep heavy OCR, conversion, CSS cleanup and navigation repairs on a backed-up PC copy, with preview and
-   approval before replacement. Do not send book contents to a cloud AI without explicit consent.
-6. Retain an undo path. Keep audit output private and local.
+**On the Kindle** — `koreader-config/plugins/kindlelab.koplugin` (Tools > KindleLab):
 
-KOReader's built-in **Profiles** plugin already supports auto-execution on book opening, conditions based
-on document properties/path/collections, and a new-document restriction. These are useful building blocks,
-not an automatic semantic classifier or a content-repair service. Suggested profile families are flowing
-text, textual PDFs, image PDFs, and comics. Fine-tune them with the reader before enabling defaults.
+1. Some seconds after the library opens (45 s at start-up, 5 s when coming back from a book), books not
+   seen before get a type tag in their custom metadata: `Tipo: Livro` (EPUB, DRM-free MOBI...),
+   `Tipo: PDF`, `Tipo: Escaneado` (PDF without a text layer: fewer than 30 % of six sample pages have 50+
+   letters), `Tipo: Quadrinho` (CBZ/CBR) or `Tipo: Amazon` (KFX, Topaz, DRM MOBI). Books that already
+   have a type tag keep it; PDFs are analysed once to add the scanned tag. Seen books are remembered in
+   `koreader/settings/kindlelab_intake.lua`, so a tag removed by the reader is not added back.
+2. Two profiles are added once to Tools > Profiles and run the **first time** a book with the tag opens
+   (auto-execution "on book opening" + "if book metadata contains" + "and if book is new"):
+   * `KindleLab: Escaneado`: crop margins (auto) and contrast 1.5;
+   * `KindleLab: Quadrinho`: zoom to the whole page, one page per screen, no cropping, contrast 1.0.
+   Later changes in a book are never undone; readers can edit or delete the profiles.
+3. While a `Tipo: Quadrinho` book is open, every page turn does a full e-ink refresh (no ghosting). It is
+   set in memory only and restored when the book closes.
+4. Comics cannot be told apart from scanned books automatically. In the reader, Tools > KindleLab >
+   "Este livro é um quadrinho" swaps `Tipo: Escaneado` for `Tipo: Quadrinho` and applies the comic profile
+   at once (tested: zoom page/full, page mode, no crop, contrast 1.0, refresh every page).
+
+The kopt profiles only affect PDF/DjVu. In MOBI/EPUB comics the page layout is the file's own; the full
+refresh still applies.
+
+Defaults for new reflowable books are KOReader's own: set the font size you like with "Set as default" in
+the bottom menu. Setting `text_lang_fallback` gives books without a language the right hyphenation.
+
+**On the PC** — `scripts/kindle-new-books.py` (stdlib Python; poppler for PDFs) with the user units in
+`systemd/`:
+
+* every 15 minutes, if the Kindle answers over SSH, it lists the library (read-only) and compares it with
+  the last check (`~/.local/state/kindlelab/new-books.json`);
+* new books get a short report: missing title/author/cover/type tag, a weak table of contents, scanned
+  PDFs and "looks like a comic" hints, plus the title/author written inside the file when the library
+  lacks them; a desktop notification points to the report;
+* nothing is written to the Kindle. Reports list book titles, so keep them out of any repository.
+
+```bash
+scripts/kindle-new-books.py --init            # remember the current library first
+cp systemd/kindlelab-new-books.* ~/.config/systemd/user/   # adjust ExecStart paths/--lang first
+systemctl --user daemon-reload && systemctl --user enable --now kindlelab-new-books.timer
+```
+
+Fixes (OCR, conversions, table-of-contents or CSS repairs) stay manual: on a backed-up copy, previewed and
+approved before replacing anything. Do not send book contents to a cloud AI without explicit consent.
+
+Tests: `tests/run.sh` (pure Lua, no KOReader needed) and `python3 -m unittest discover -s tests`.
 
 ## Primary references
 
