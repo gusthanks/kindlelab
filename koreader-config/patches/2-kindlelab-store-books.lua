@@ -6,9 +6,8 @@ What it does
     DRM-protected MOBI/AZW files. KOReader cannot read them, so they get the stock Kindle
     cover and title, and tapping one closes KOReader and opens the book in the Kindle's own
     reader (KOReader's launcher pauses the stock KFX services while KOReader runs).
-  * Keeps CoverBrowser's book-info cache complete. SimpleUI's Authors/Series/Tags views and the
-    folder covers read it. Shortly after start-up, entries of deleted or moved files are pruned
-    and books missing from the cache are indexed in the background.
+  * Keep the books in the main documents folder: the Kindle expects store books there (one opened
+    from a subfolder was downloaded again into documents/ by the stock system).
 
 What it does NOT do
   * It never reads, decrypts or converts the contents of a protected book. It only reads the
@@ -32,8 +31,6 @@ local function setup()
     local CCDB = "/var/local/cc.db"
     local THUMB_DIR = "/mnt/us/system/thumbnails/"
     local READER_URI = "app://com.lab126.booklet.reader"
-    -- Cover size stored in the cache (same as CoverBrowser's mosaic on a PW3, 3x2 grid).
-    local COVER_SPECS = { max_cover_w = 331, max_cover_h = 446 }
     -- Formats KOReader cannot read at all: always handed to the stock reader.
     local STOCK_ONLY = { kfx = true, azw1 = true, azw3 = true, azw4 = true }
     -- Formats KOReader reads unless they are DRM-protected.
@@ -203,43 +200,31 @@ local function setup()
         return orig_showReader(self, file, provider, ...)
     end
 
-    -- Library sync: prune stale cache rows, then index the books the cache does not know yet.
-    local function walk(dir, out)
-        local ok, iter, dir_obj = pcall(lfs.dir, dir)
-        if not ok then return end
-        for name in iter, dir_obj do
-            if name ~= "." and name ~= ".." and name:sub(1, 1) ~= "." then
-                local path = dir .. "/" .. name
-                local mode = lfs.attributes(path, "mode")
-                if mode == "directory" then
-                    if not name:match("%.sdr$") and name ~= "dictionaries" then walk(path, out) end
-                elseif mode == "file" and DocumentRegistry:hasProvider(path) then
-                    out[#out + 1] = path
-                end
-            end
-        end
-    end
-
-    UIManager:scheduleIn(20, function()
+    -- Covers that were missing when a book was indexed (the stock thumbnail appears later, or a
+    -- custom cover was added): forget those cache rows, so the library sync indexes them again.
+    UIManager:scheduleIn(15, function()
         local ok, err = pcall(function()
             local BookInfoManager = package.loaded["bookinfomanager"]
             if not BookInfoManager then return end
-            BookInfoManager:removeNonExistantEntries()
-            local books = {}
-            walk(G_reader_settings:readSetting("home_dir") or "/mnt/us/documents", books)
-            local todo = {}
-            for _, path in ipairs(books) do
-                if not BookInfoManager:getBookInfo(path, false) then
-                    todo[#todo + 1] = { filepath = path, cover_specs = COVER_SPECS }
+            BookInfoManager:openDbConnection()
+            local res = BookInfoManager.db_conn:exec(
+                "SELECT directory, filename FROM bookinfo WHERE coalesce(has_cover, '') <> 'Y';")
+            if not (res and res[1]) then return end
+            local DocSettings = require("docsettings")
+            for i, directory in ipairs(res[1]) do
+                local path = directory .. res[2][i]
+                local retry = DocSettings:findCustomCoverFile(path) ~= nil
+                if not retry and isStoreBook(path) then
+                    local entry = catalogEntry(path)
+                    retry = entry ~= nil and entry.key ~= nil and lfs.attributes(THUMB_DIR .. "thumbnail_"
+                        .. entry.key .. "_" .. tostring(entry.ctype) .. "_portrait.jpg", "mode") == "file"
                 end
-            end
-            if #todo > 0 then
-                logger.info("kindlelab-store: indexing", #todo, "books in the background")
-                BookInfoManager:extractInBackground(todo)
+                if retry then BookInfoManager:deleteBookInfo(path) end
             end
         end)
-        if not ok then logger.warn("kindlelab-store: library sync failed:", err) end
+        if not ok then logger.warn("kindlelab-store: cover retry failed:", err) end
     end)
+
 end
 
 local ok, err = pcall(setup)

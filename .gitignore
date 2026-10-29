@@ -5,6 +5,7 @@ backups/
 screenshots/
 *.png
 !docs/img/*.png
+!kindle-files/koreader-tile/icons/*.png
 highlights/
 My Clippings.txt
 settings.reader.lua

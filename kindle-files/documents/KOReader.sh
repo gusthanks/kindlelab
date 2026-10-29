@@ -1,7 +1,7 @@
 #!/bin/sh
 # Name: KOReader
 # Author: KindleLab
-# Icon: /mnt/us/koreader/resources/koreader.png
+# Icon: /mnt/us/koreader/kindlelab/icons/woodcut-reader.png
 # DontUseFBInk
 # One-tap KOReader tile for the Amazon home screen. Copy this file to /mnt/us/documents/.
 # Needs a jailbreak with scriptlet support (Universal Hotfix / SH_Integration) and KOReader
