@@ -37,8 +37,8 @@ report() { echo "privacy: $1: $2"; fail=1; }
 for f in "${FILES[@]}"; do
   [ -n "$f" ] || continue
   [ "$f" = "scripts/check-privacy.sh" ] && continue        # holds the patterns themselves
+  show "$f" 2>/dev/null | LC_ALL=C grep -qI . 2>/dev/null || continue   # skip binary (and empty) files
   content=$(show "$f" 2>/dev/null) || continue
-  printf '%s' "$content" | grep -qI . || continue           # skip binary files
   for entry in "${PATTERNS[@]}"; do
     name=${entry%%|*}; rx=${entry#*|}
     while IFS= read -r hit; do
