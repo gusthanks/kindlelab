@@ -27,11 +27,14 @@ local logger = require("logger")
 local IconFile = require("kindlelab_icon")
 local Intake = require("kindlelab_intake")
 local ReadingProfiles = require("kindlelab_profiles")
+local ReadingList = require("kindlelab_readinglist")
 local Types = require("kindlelab_types")
 
 local PT = (G_reader_settings:readSetting("language") or ""):match("^pt") ~= nil
 local STATE_FILE = DataStorage:getSettingsDir() .. "/kindlelab_intake.lua"
 local PROFILES_FLAG = "kindlelab_profiles_v1"
+local TBR_COLLECTION = "To Be Read" -- SimpleUI's list (pt_BR: "Para Ler"); the name is SimpleUI's key
+local NOTES_FILE = DataStorage:getDataDir() .. "/kindlelab/estudo.lua"
 
 local S = PT and {
     root = "KindleLab",
@@ -47,6 +50,14 @@ local S = PT and {
     comic_on = "Marcado como quadrinho.\nPágina inteira e tela limpa a cada página.",
     comic_off = "Não é mais quadrinho.\nA tela volta a limpar como antes.",
     comic_failed = "Não consegui salvar a etiqueta:\n%s",
+    list_root = "Lista de leitura",
+    list_guide = "Como estudar",
+    list_buy = "Livros para comprar",
+    list_order = "Como mudar a lista",
+    list_order_text = "A lista é a coleção \"Para Ler\" do SimpleUI, que também aparece na tela inicial.\n\n• Incluir: segure o dedo num livro na Biblioteca e toque em \"Adicionar à lista Quero Ler\".\n• Mudar a ordem: Biblioteca > Coleções > Para Ler > Reorganizar.\n• Livros terminados saem da lista sozinhos.",
+    list_empty = "A lista \"Para Ler\" está vazia.",
+    list_hold = "Toque para abrir. Segure para ver a dica de estudo.",
+    list_no_note = "Sem dica para este livro.",
 } or {
     root = "KindleLab",
     icon_menu = "Kindle home screen icon",
@@ -61,6 +72,14 @@ local S = PT and {
     comic_on = "Marked as a comic.\nWhole page and a clean screen on every page.",
     comic_off = "No longer a comic.\nScreen refreshes go back to normal.",
     comic_failed = "Could not save the tag:\n%s",
+    list_root = "Reading list",
+    list_guide = "How to study",
+    list_buy = "Books to buy",
+    list_order = "How to change the list",
+    list_order_text = "The list is SimpleUI's \"To Be Read\" collection, also shown on the home screen.\n\n• Add: hold a book in the Library and tap \"Add to To Be Read\".\n• Reorder: Library > Collections > To Be Read > Arrange.\n• Finished books leave the list automatically.",
+    list_empty = "The \"To Be Read\" list is empty.",
+    list_hold = "Tap to open. Hold to see the study tip.",
+    list_no_note = "No tip for this book.",
 }
 
 local NAMES = PT and {
@@ -319,7 +338,61 @@ function KindleLab:iconItems()
     return items
 end
 
+-- Reading list: SimpleUI's "To Be Read" collection in its manual order, plus optional study notes.
+function KindleLab:openBook(file)
+    if self.ui.document and self.ui.switchDocument then
+        self.ui:switchDocument(file)
+    else
+        require("apps/reader/readerui"):showReader(file)
+    end
+end
+
+local function showText(text)
+    UIManager:show(InfoMessage:new{ text = text, show_icon = false })
+end
+
+function KindleLab:readingListItems()
+    local notes = ReadingList.loadNotes(NOTES_FILE)
+    local coll
+    pcall(function()
+        local RC = require("readcollection")
+        RC:_read()
+        coll = RC.coll and RC.coll[TBR_COLLECTION]
+    end)
+    local items = {}
+    if notes.guide then
+        items[#items + 1] = { text = S.list_guide, keep_menu_open = true, callback = function() showText(notes.guide) end }
+    end
+    local list = ReadingList.entries(coll, notes)
+    if #list == 0 then
+        items[#items + 1] = { text = S.list_empty, enabled = false }
+    end
+    if #items > 0 then items[#items].separator = true end
+    for _, e in ipairs(list) do
+        items[#items + 1] = {
+            text = ReadingList.label(e),
+            help_text = S.list_hold,
+            callback = function() self:openBook(e.file) end,
+            hold_callback = function()
+                showText(e.title .. (e.stage and ("\n" .. e.stage) or "") .. "\n\n" .. (e.note or S.list_no_note))
+            end,
+        }
+    end
+    if #items > 0 then items[#items].separator = true end
+    local buy = ReadingList.buyText(notes)
+    if buy then
+        items[#items + 1] = { text = S.list_buy, keep_menu_open = true, callback = function() showText(buy) end }
+    end
+    items[#items + 1] = { text = S.list_order, keep_menu_open = true, callback = function() showText(S.list_order_text) end }
+    return items
+end
+
 function KindleLab:addToMainMenu(menu_items)
+    menu_items.kindlelab_reading_list = {
+        text = S.list_root,
+        sorting_hint = "tools",
+        sub_item_table_func = function() return self:readingListItems() end,
+    }
     local items = {}
     if self.ui.document then
         items[#items + 1] = {

@@ -17,7 +17,7 @@ PATCHES = ('2-kindlelab-defaults.lua', '2-kindlelab-library.lua', '2-kindlelab-s
            '2-kindlelab-sleepscreen.lua')
 ICONS = ('woodcut-reader.png', 'pixel-vampire.png', 'open-book-sun.png')
 MODULES = ('_meta.lua', 'main.lua', 'kindlelab_icon.lua', 'kindlelab_types.lua',
-           'kindlelab_intake.lua', 'kindlelab_profiles.lua')
+           'kindlelab_intake.lua', 'kindlelab_profiles.lua', 'kindlelab_readinglist.lua')
 ALLOWED = frozenset(
     ['documents/KOReader.sh']
     + ['koreader/patches/' + f for f in PATCHES]
