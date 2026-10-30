@@ -228,8 +228,12 @@ também, com capa, e abre cada um no leitor do Kindle com um toque ([passo 8](#p
 
 ## Passo 8: Deixe do seu jeito (opcional)
 
-O resto deste repositório começa aqui. Tudo abaixo foi testado no nosso Paperwhite 3 (guias em inglês):
+O resto deste repositório começa aqui. A configuração de leitura foi testada no nosso Paperwhite 3; veja
+[compatibilidade](compatibility.md) para os testes e limites específicos do instalador (em inglês).
 
+- **Instale os complementos do KindleLab juntos:** o [instalador offline](../installer/INSTALL.pt-BR.md) tem
+  simulação, backup, conferência SHA-256 e Desfazer. Precisa de Python 3.11+ e drive USB; não suporta MTP.
+  Preserva ajustes, mascote e atalho existentes. O KOReader e o SimpleUI opcional são instalados separadamente.
 - **A configuração de leitura do KindleLab:** uma biblioteca só para todos os seus livros, lista limpa, a
   capa do livro na tela de descanso, livros novos que se organizam sozinhos e um ícone de um toque para o
   KOReader. Veja o [koreader-config](../koreader-config/README.md) e o [docs/07](07-reading-quality.md).

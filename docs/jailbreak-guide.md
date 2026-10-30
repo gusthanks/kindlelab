@@ -220,8 +220,12 @@ opens them in the Kindle's reader with one tap ([step 8](#step-8-make-it-yours-o
 
 ## Step 8: Make it yours (optional)
 
-The rest of this repository starts here. Everything below was tested on our Paperwhite 3:
+The rest of this repository starts here. The reading setup below was tested on our Paperwhite 3; see
+[compatibility](compatibility.md) for the installer's separate test coverage and limits.
 
+- **Install the KindleLab add-ons together:** the [offline installer](../installer/INSTALL.md) provides a
+  preview, backup, SHA-256 checks and Undo. Requires Python 3.11+ and a mounted USB drive; not MTP. Existing
+  KOReader settings, mascot and launcher are preserved. KOReader and optional SimpleUI must be installed separately.
 - **The KindleLab reading setup:** one library for all your books, a tidy list, the cover of your book on
   the sleep screen, new books that organize themselves, a one-tap KOReader icon.
   See [koreader-config](../koreader-config/README.md) and [docs/07](07-reading-quality.md).

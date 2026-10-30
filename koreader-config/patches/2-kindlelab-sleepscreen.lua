@@ -18,11 +18,18 @@ if lfs.attributes(dir, "mode") ~= "directory" then
     return
 end
 
-G_reader_settings:saveSetting("screensaver_type", "cover")
-G_reader_settings:makeTrue("screensaver_hide_cover_in_filemanager") -- no book open -> random image
-G_reader_settings:saveSetting("screensaver_dir", dir)
-G_reader_settings:makeFalse("screensaver_show_message")
-G_reader_settings:makeTrue("screensaver_hide_fallback_msg")
+-- Missing settings only: explicit preferences (even false) are never overwritten by the installer.
+for key, value in pairs({
+    screensaver_type = 'cover',
+    screensaver_hide_cover_in_filemanager = true,
+    screensaver_dir = dir,
+    screensaver_show_message = false,
+    screensaver_hide_fallback_msg = true,
+}) do
+    if G_reader_settings:readSetting(key) == nil then
+        G_reader_settings:saveSetting(key, value)
+    end
+end
 G_reader_settings:makeTrue(FLAG)
 G_reader_settings:flush()
 logger.info("kindlelab-sleepscreen: applied")

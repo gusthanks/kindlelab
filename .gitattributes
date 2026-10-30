@@ -1,0 +1,2 @@
+# Store Windows launchers with LF in git and check them out with native CRLF.
+*.cmd text eol=crlf

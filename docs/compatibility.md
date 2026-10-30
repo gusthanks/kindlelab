@@ -26,6 +26,7 @@ guess for a test:
 | KindleLab plugin: type tags, first-opening profiles, comic toggle, icon switcher | ✅ on-device test with book copies; menu actions run through their own functions; icon swap tested on a copy of the launcher | ❓ |
 | `kindle-new-books.py` + systemd user timer | ✅ Arch-based Linux | ❓ other distros (needs Python 3, poppler for PDFs) |
 | *Where am I?* page (`checker/`) | ✅ legacy-path results checked against two real states of our PW3 (stuck at KUAL, and finished); page tested in Chrome | ❓ modern-path signs (`documents/JAILBROKEN.txt`, `jb.sh.log`) come from KindleModding's `jb.sh` source, not from a device; MTP Kindles: choose a copy of the drive; Firefox/Safari use the classic folder dialog |
+| Offline add-on installer (`installer/`) | ✅ install/reinstall/undo on Linux with copies of real PW3 settings; payload hashes and Lua tests verified in an isolated folder on the PW3, without replacing the active setup | ❓ other Kindle models; desktop filesystem tests run in the Installer workflow (Windows/macOS/Linux). Python 3.11+ and a mounted USB drive required; MTP unsupported. This is not a jailbreak or KOReader installer. |
 | `kindle-status.sh`, `kindle-screenshot.sh` | ✅ | ❓ need USBNetwork tools (`fbgrab`, `lipc-*`) |
 | `full-backup.sh` | ✅ | ❓ refuses unknown layouts, `--force` on untested models |
 | `pull-highlights.py` | ✅ clippings in PT, EN, FR | ❓ ES / DE / IT keywords included, untested |

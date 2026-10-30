@@ -52,16 +52,19 @@ Plus: KOReader with a simple home screen (SimpleUI), dictionary, Wikipedia, free
 highlight export to Markdown.
 
 **Who it is for:** anyone with a Kindle who wants KOReader without weeks of forum reading. The jailbreak
-guide works with any computer; the optional tools after it use a Linux PC, and the KOReader pieces are
-plain files you copy to the Kindle.
+guide works with any computer. The [offline add-on installer](installer/INSTALL.md) targets a mounted USB
+drive and needs Python 3.11+; other PC tools use Linux. Manual copying remains available.
 
 **What it is not:** not a jailbreak tool (we don't host or change jailbreak files; the guide sends you to the
 official ones), not a DRM remover or a piracy tool, not a replacement OS
 ([docs/06](docs/06-android-and-custom-os.md)), and not tested beyond one device.
 
-**Status:** everything in the table works and was tested on the PW3. Installing the KOReader pieces is still
-manual ([koreader-config/README.md](koreader-config/README.md)). A one-step package with this setup as the
-default is in progress.
+**Status:** the reading setup was tested on the PW3. The **[offline installer preview](installer/INSTALL.md)**
+now bundles KindleLab's own add-ons with a window, read-only preview, backup, SHA-256 checks and Undo.
+It preserves existing settings and a customized launcher. Python 3.11+ and a normal USB-drive connection
+are required; **MTP devices are not supported by this first installer**. KOReader, SimpleUI and dictionaries
+remain separate installations. [Download releases](https://github.com/gusthanks/kindlelab/releases) ·
+[manual installation](koreader-config/README.md).
 
 ## Guides
 
@@ -79,6 +82,7 @@ default is in progress.
 | Path | What it is |
 |---|---|
 | [`docs/`](docs/) | The guides above |
+| [`installer/`](installer/) | Offline add-on installer: window/CLI, backup, SHA-256 verification and Undo |
 | [`checker/`](checker/) | The [Where am I?](https://gusthanks.github.io/kindlelab/) page (runs in the browser) and its command-line version |
 | [`scripts/`](scripts/) | PC-side tools (bash/python). All read-only on the Kindle unless stated |
 | [`koreader-config/`](koreader-config/) | KOReader user patches, the KindleLab plugin, OPDS catalog and news-feed templates |

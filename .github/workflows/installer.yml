@@ -1,0 +1,37 @@
+name: Installer
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'installer/**'
+      - 'scripts/build-installer.py'
+      - 'tests/test_installer.py'
+      - 'koreader-config/**'
+      - 'kindle-files/**'
+      - '.github/workflows/installer.yml'
+  pull_request:
+    paths:
+      - 'installer/**'
+      - 'scripts/build-installer.py'
+      - 'tests/test_installer.py'
+      - 'koreader-config/**'
+      - 'kindle-files/**'
+      - '.github/workflows/installer.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: ['3.11', '3.14']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m unittest discover -s tests -p test_installer.py -v
+      - run: python -m compileall -q installer scripts/build-installer.py

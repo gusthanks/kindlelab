@@ -1,5 +1,9 @@
 # KOReader pieces
 
+**Prefer an installer?** The [offline installer](../installer/INSTALL.md) bundles KindleLab's own add-ons,
+icons and a fallback sleep-screen image. It makes verified backups and supports Undo. It requires Python
+3.11+ and a mounted USB drive (not MTP). The instructions below remain for manual installation.
+
 Everything KindleLab adds to KOReader is a plain file in this folder. Nothing here edits KOReader or
 SimpleUI themselves, so their updates do not undo it, and each piece can be removed on its own.
 
@@ -9,7 +13,8 @@ Tested on: Kindle Paperwhite 3 (FW 5.16.2.1.1), KOReader v2026.07.1, SimpleUI 3.
 |---|---|---|
 | `patches/2-kindlelab-store-books.lua` | `koreader/patches/` | **One library.** Amazon books (KFX, Topaz `.azw1`, AZW3/AZW4, DRM MOBI) appear in KOReader with the Kindle's own cover, title and author. Tapping one closes KOReader and opens it in the Kindle's reader. It only reads the stock catalog and cover thumbnails, never the book contents. Keep these books in the main `documents` folder. |
 | `patches/2-kindlelab-library.lua` | `koreader/patches/` | **Only books in the list.** Hides the dictionaries folder (they keep working in the stock reader), launcher scripts, `My Clippings.txt` and folders without books. Keeps the cover/tag cache in sync with the disk. |
-| `patches/2-kindlelab-sleepscreen.lua` | `koreader/patches/` | **Sleep screen** = the cover of the book you are reading; in the library, one of the Kindle's own screensaver images (see step 2). Applied once: your later menu choices are kept. |
+| `patches/2-kindlelab-defaults.lua` | `koreader/patches/` | **Gentle first-run defaults:** home/downloads in documents, title sorting and home-folder lock, only where no preference exists. Never chooses your font, language or mascot. |
+| `patches/2-kindlelab-sleepscreen.lua` | `koreader/patches/` | **Sleep-screen defaults:** book cover while reading; a fallback image in the library. Only fills missing preferences once, preserving existing choices. The installer includes its own fallback; manual installs can copy the stock images (step 2). |
 | `plugins/kindlelab.koplugin/` | `koreader/plugins/` | **Tools > KindleLab.** Type tags for new books, reading profiles for scanned PDFs and comics on first opening, "This book is a comic", and the Kindle home-screen icon switcher. Details: [docs/07](../docs/07-reading-quality.md) and [kindle-files/koreader-tile](../kindle-files/koreader-tile/README.md). |
 | `opds.lua` | `koreader/settings/opds.lua` | Free-book catalogs (Project Gutenberg, filtered by language) |
 | `feeds-pt-BR.lua` | `<news dir>/feed_config.lua` | News feeds (Brazilian Portuguese example) |

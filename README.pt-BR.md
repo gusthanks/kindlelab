@@ -53,16 +53,19 @@ Também vem: KOReader com tela inicial simples (SimpleUI), dicionário, Wikipéd
 gratuitos, notícias e exportação dos seus destaques para Markdown.
 
 **Para quem é:** quem tem um Kindle e quer o KOReader sem passar semanas lendo fóruns. O guia de desbloqueio
-funciona com qualquer computador; as ferramentas opcionais depois dele usam um PC com Linux, e as peças do
-KOReader são arquivos comuns que você copia para o Kindle.
+funciona com qualquer computador. O [instalador offline dos complementos](installer/INSTALL.pt-BR.md) usa um
+drive USB e Python 3.11+; as outras ferramentas do PC usam Linux. A cópia manual continua disponível.
 
 **O que ele não é:** não é uma ferramenta de desbloqueio (não hospedamos nem alteramos os arquivos de
 desbloqueio; o guia leva você aos oficiais), não remove DRM nem baixa livros piratas, não troca o sistema do
 Kindle ([docs/06](docs/06-android-and-custom-os.md), em inglês) e não foi testado além de um aparelho.
 
-**Estado atual:** tudo o que está na tabela funciona e foi testado no Paperwhite 3. A instalação das peças
-do KOReader ainda é manual ([koreader-config/README.md](koreader-config/README.md), em inglês). Um pacote de
-instalação com esta configuração como padrão está em andamento.
+**Estado atual:** a configuração de leitura foi testada no Paperwhite 3. A **[prévia do instalador
+offline](installer/INSTALL.pt-BR.md)** reúne os complementos do próprio KindleLab, com janela, simulação sem
+escrever nada, backup, conferência SHA-256 e Desfazer. Preserva ajustes e atalhos personalizados. Precisa de
+Python 3.11+ e conexão como drive USB; **esta primeira versão não suporta MTP**. KOReader, SimpleUI e
+dicionários continuam sendo instalações separadas. [Baixar versões](https://github.com/gusthanks/kindlelab/releases) ·
+[instalação manual](koreader-config/README.md).
 
 ## Guias
 
@@ -83,6 +86,7 @@ inglês, e a maioria dos navegadores traduz a página (botão direito → **Trad
 | Pasta | O que é |
 |---|---|
 | [`docs/`](docs/) | Os guias acima |
+| [`installer/`](installer/) | Instalador offline: janela/terminal, backup, conferência SHA-256 e Desfazer |
 | [`checker/`](checker/) | A página [Onde estou?](https://gusthanks.github.io/kindlelab/?lang=pt) (roda no navegador) e a versão para terminal |
 | [`scripts/`](scripts/) | Ferramentas para o PC (bash/python). Só leem o Kindle, salvo quando indicado |
 | [`koreader-config/`](koreader-config/) | Patches do KOReader, o plugin do KindleLab, modelos de catálogo OPDS e de notícias |
